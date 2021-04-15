@@ -27,7 +27,7 @@
     </div>
 
     <div class="footer">
-      <p>Articles - recruits for aurora creation Białytsok</p>
+      <p>Articles - recruits for Aurora Creation Białytsok</p>
     </div>
   </div>
 </body>
