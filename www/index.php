@@ -1,19 +1,44 @@
 <?php
-// phpinfo();
 
-$link = mysqli_connect("mysql", "root", "password", null);
+declare(strict_types=1);
 
-if (!$link) {
-    echo "Error: Unable to connect to MySQL." . PHP_EOL;
-    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-    exit;
+namespace App;
+
+require_once("src/View.php");
+
+const DEFAULT_ACTION = 'list';
+
+$action = $_GET['action'] ?? DEFAULT_ACTION;
+
+$view = new View();
+
+switch ($action) {
+    case 'create':
+        $page = 'create';
+        $created = false;
+        if (!empty($_POST)) {
+            $created = true;
+            $viewParams = [
+                'title' => $_POST['title'],
+                'description' => $_POST['description']
+            ];
+        };
+        $viewParams['created'] = $created;
+        break;
+    case 'show':
+        $viewParams = [
+            'title' => 'My articles',
+            'description' => 'description'
+        ];
+        break;
+    default:
+        $page = 'list';
+        $viewParams['resultList'] = "Show articles";
+        break;
 }
 
-echo "Success: A proper connection to MySQL was made!" . PHP_EOL. "<br/>";
-echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL. "<br/>";
-echo "MySQL Server version: ".$link->server_version;
+$view->render($page, $viewParams);
 
-mysqli_close($link);
 
-?>
+
+
