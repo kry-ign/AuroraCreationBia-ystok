@@ -12,7 +12,7 @@ services:
             
     mysql:
         build: ./bin/mysql
-        container_name: 'aurora'
+        container_name: 'png-mysql-test'
         # restart: 'always'
         ports:
             - "3306:3306"
@@ -20,10 +20,10 @@ services:
             - ${MYSQL_DATA_DIR-./data/mysql}:/var/lib/mysql
             - ${MYSQL_LOG_DIR-./logs/mysql}:/var/log/mysql
         environment:
-            MYSQL_ROOT_PASSWORD: password
-            MYSQL_DATABASE: demo
-            MYSQL_USER: root
-            MYSQL_PASSWORD: password
+            MYSQL_ROOT_PASSWORD: test
+            MYSQL_DATABASE: test
+            MYSQL_USER: test
+            MYSQL_PASSWORD: test
 
     phpmyadmin:
         build: ./bin/phpmyadmin
